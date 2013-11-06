@@ -3,6 +3,8 @@
 #include <QStringList>
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QFont>
+#include <QString>
 #include <cstdlib>
 
 #ifdef VIDEO_GSTREAMER
@@ -44,6 +46,12 @@ extern "C" {
 
 int main( int argc, char* argv[] )
 {
+#ifdef Q_OS_MACX
+    if ( QSysInfo::MacintoshVersion > QSysInfo::MV_10_8 ) {
+        QFont::insertSubstitution(".Lucida Grande UI", "Lucida Grande");
+    }
+#endif
+
     initSoundEngine();
 
 #ifdef VIDEO_GSTREAMER
